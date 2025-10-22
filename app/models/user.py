@@ -1,6 +1,6 @@
 """User model - ready for subscription fields to be added"""
-from sqlmodel import SQLModel, Field
-from typing import Optional
+from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional, List
 
 
 class User(SQLModel, table=True):
@@ -12,3 +12,6 @@ class User(SQLModel, table=True):
     is_active: bool = Field(default=True)
 
     # Subscription fields will be added by the implementation story
+
+    # Relationship with orders
+    orders: List["Order"] = Relationship(back_populates="user")
