@@ -1,1 +1,2 @@
-"""API routes package - ready for checkout and webhook endpoints"""
+"""API routes package - includes checkout endpoint and ready for webhook endpoints"""
+# Import routers to make them available
