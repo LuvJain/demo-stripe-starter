@@ -1,6 +1,7 @@
 """Main FastAPI application"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.api import api_router
 
 app = FastAPI(title="Stripe Integration API", version="1.0.0")
 
@@ -13,10 +14,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include API router
+app.include_router(api_router)
+
 
 @app.get("/")
 def root():
-    return {"message": "Stripe Integration API - Ready for checkout implementation"}
+    return {"message": "Stripe Integration API - Checkout implementation ready"}
 
 
 @app.get("/health")
