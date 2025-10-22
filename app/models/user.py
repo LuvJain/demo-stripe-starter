@@ -1,14 +1,19 @@
-"""User model - ready for subscription fields to be added"""
+"""User model with subscription fields for Stripe integration"""
 from sqlmodel import SQLModel, Field
 from typing import Optional
 
 
 class User(SQLModel, table=True):
-    """Basic user model without subscription fields"""
+    """User model with subscription fields for Stripe integration"""
     id: Optional[int] = Field(default=None, primary_key=True)
     email: str = Field(unique=True, index=True)
     username: str = Field(unique=True, index=True)
     full_name: Optional[str] = None
     is_active: bool = Field(default=True)
 
-    # Subscription fields will be added by the implementation story
+    # Stripe subscription fields
+    stripe_customer_id: Optional[str] = Field(default=None, unique=True, index=True)
+    subscription_status: Optional[str] = Field(default=None,
+                                               description="Status of user's subscription: 'active', 'canceled', 'past_due', etc.")
+    subscription_tier: Optional[str] = Field(default=None,
+                                             description="Tier of user's subscription: 'basic', 'premium', 'pro', etc.")
